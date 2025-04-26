@@ -14,7 +14,7 @@ async function addCharacter(req, res) {
 
 
 async function validateCoordinates(req, res) {
-    const TARGET_BOX_SIZE = 75;
+    const TARGET_BOX_SIZE = 5;
     const name = req.params.name;
     console.log("Query",req.query);
     console.log(name);

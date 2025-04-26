@@ -38,8 +38,13 @@ async function validateCoordinates(req, res) {
 
 }
 
+async function ping(req, res) {
+    res.json("Server is running");
+}
+
 module.exports = {
     getCharacters,
     addCharacter,
-    validateCoordinates
+    validateCoordinates,
+    ping
 }

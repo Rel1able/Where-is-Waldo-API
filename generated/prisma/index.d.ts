@@ -892,16 +892,19 @@ export namespace Prisma {
   export type CharacterMinAggregateOutputType = {
     id: number | null
     name: string | null
+    found: boolean | null
   }
 
   export type CharacterMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    found: boolean | null
   }
 
   export type CharacterCountAggregateOutputType = {
     id: number
     name: number
+    found: number
     coordinates: number
     _all: number
   }
@@ -918,16 +921,19 @@ export namespace Prisma {
   export type CharacterMinAggregateInputType = {
     id?: true
     name?: true
+    found?: true
   }
 
   export type CharacterMaxAggregateInputType = {
     id?: true
     name?: true
+    found?: true
   }
 
   export type CharacterCountAggregateInputType = {
     id?: true
     name?: true
+    found?: true
     coordinates?: true
     _all?: true
   }
@@ -1021,6 +1027,7 @@ export namespace Prisma {
   export type CharacterGroupByOutputType = {
     id: number
     name: string
+    found: boolean
     coordinates: JsonValue
     _count: CharacterCountAggregateOutputType | null
     _avg: CharacterAvgAggregateOutputType | null
@@ -1046,28 +1053,32 @@ export namespace Prisma {
   export type CharacterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    found?: boolean
     coordinates?: boolean
   }, ExtArgs["result"]["character"]>
 
   export type CharacterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    found?: boolean
     coordinates?: boolean
   }, ExtArgs["result"]["character"]>
 
   export type CharacterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    found?: boolean
     coordinates?: boolean
   }, ExtArgs["result"]["character"]>
 
   export type CharacterSelectScalar = {
     id?: boolean
     name?: boolean
+    found?: boolean
     coordinates?: boolean
   }
 
-  export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "coordinates", ExtArgs["result"]["character"]>
+  export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "found" | "coordinates", ExtArgs["result"]["character"]>
 
   export type $CharacterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Character"
@@ -1075,6 +1086,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      found: boolean
       coordinates: Prisma.JsonValue
     }, ExtArgs["result"]["character"]>
     composites: {}
@@ -1501,6 +1513,7 @@ export namespace Prisma {
   interface CharacterFieldRefs {
     readonly id: FieldRef<"Character", 'Int'>
     readonly name: FieldRef<"Character", 'String'>
+    readonly found: FieldRef<"Character", 'Boolean'>
     readonly coordinates: FieldRef<"Character", 'Json'>
   }
     
@@ -1885,6 +1898,7 @@ export namespace Prisma {
   export const CharacterScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    found: 'found',
     coordinates: 'coordinates'
   };
 
@@ -1957,6 +1971,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -1993,12 +2014,14 @@ export namespace Prisma {
     NOT?: CharacterWhereInput | CharacterWhereInput[]
     id?: IntFilter<"Character"> | number
     name?: StringFilter<"Character"> | string
+    found?: BoolFilter<"Character"> | boolean
     coordinates?: JsonFilter<"Character">
   }
 
   export type CharacterOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    found?: SortOrder
     coordinates?: SortOrder
   }
 
@@ -2008,12 +2031,14 @@ export namespace Prisma {
     OR?: CharacterWhereInput[]
     NOT?: CharacterWhereInput | CharacterWhereInput[]
     name?: StringFilter<"Character"> | string
+    found?: BoolFilter<"Character"> | boolean
     coordinates?: JsonFilter<"Character">
   }, "id">
 
   export type CharacterOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    found?: SortOrder
     coordinates?: SortOrder
     _count?: CharacterCountOrderByAggregateInput
     _avg?: CharacterAvgOrderByAggregateInput
@@ -2028,45 +2053,53 @@ export namespace Prisma {
     NOT?: CharacterScalarWhereWithAggregatesInput | CharacterScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Character"> | number
     name?: StringWithAggregatesFilter<"Character"> | string
+    found?: BoolWithAggregatesFilter<"Character"> | boolean
     coordinates?: JsonWithAggregatesFilter<"Character">
   }
 
   export type CharacterCreateInput = {
     name: string
+    found?: boolean
     coordinates: JsonNullValueInput | InputJsonValue
   }
 
   export type CharacterUncheckedCreateInput = {
     id?: number
     name: string
+    found?: boolean
     coordinates: JsonNullValueInput | InputJsonValue
   }
 
   export type CharacterUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    found?: BoolFieldUpdateOperationsInput | boolean
     coordinates?: JsonNullValueInput | InputJsonValue
   }
 
   export type CharacterUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    found?: BoolFieldUpdateOperationsInput | boolean
     coordinates?: JsonNullValueInput | InputJsonValue
   }
 
   export type CharacterCreateManyInput = {
     id?: number
     name: string
+    found?: boolean
     coordinates: JsonNullValueInput | InputJsonValue
   }
 
   export type CharacterUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    found?: BoolFieldUpdateOperationsInput | boolean
     coordinates?: JsonNullValueInput | InputJsonValue
   }
 
   export type CharacterUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    found?: BoolFieldUpdateOperationsInput | boolean
     coordinates?: JsonNullValueInput | InputJsonValue
   }
 
@@ -2095,6 +2128,11 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
   export type JsonFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -2122,6 +2160,7 @@ export namespace Prisma {
   export type CharacterCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    found?: SortOrder
     coordinates?: SortOrder
   }
 
@@ -2132,11 +2171,13 @@ export namespace Prisma {
   export type CharacterMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    found?: SortOrder
   }
 
   export type CharacterMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    found?: SortOrder
   }
 
   export type CharacterSumOrderByAggregateInput = {
@@ -2176,6 +2217,14 @@ export namespace Prisma {
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
   }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -2205,6 +2254,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2238,6 +2291,11 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2282,6 +2340,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<

@@ -120,6 +120,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.CharacterScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  found: 'found',
   coordinates: 'coordinates'
 };
 

@@ -9,7 +9,8 @@ datasource db {
 }
 
 model Character {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
+  found       Boolean @default(false)
   coordinates Json
 }

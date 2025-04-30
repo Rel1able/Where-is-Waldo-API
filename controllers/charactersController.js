@@ -29,9 +29,9 @@ async function validateCoordinates(req, res) {
             userX < x - TARGET_BOX_SIZE / 2) ||
         (userY > y + TARGET_BOX_SIZE / 2 ||
             userY < y - TARGET_BOX_SIZE / 2)) {
-        res.status(400).json("Wrong one")
+        res.status(400).json("Try again")
     } else {
-        res.status(200).json("You are right")
+        res.status(200).json("is found")
     }
 
     console.log(character);

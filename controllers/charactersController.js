@@ -42,9 +42,12 @@ async function ping(req, res) {
     res.json("Server is running");
 }
 
+
+
 module.exports = {
     getCharacters,
     addCharacter,
     validateCoordinates,
     ping
 }
+

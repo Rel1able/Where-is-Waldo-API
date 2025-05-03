@@ -124,6 +124,19 @@ exports.Prisma.CharacterScalarFieldEnum = {
   coordinates: 'coordinates'
 };
 
+exports.Prisma.PlayerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  bestTime: 'bestTime'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  sid: 'sid',
+  data: 'data',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -146,7 +159,9 @@ exports.Prisma.JsonNullValueFilter = {
 
 
 exports.Prisma.ModelName = {
-  Character: 'Character'
+  Character: 'Character',
+  Player: 'Player',
+  Session: 'Session'
 };
 
 /**

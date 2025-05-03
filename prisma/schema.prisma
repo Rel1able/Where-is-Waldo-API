@@ -14,3 +14,16 @@ model Character {
   found       Boolean @default(false)
   coordinates Json
 }
+
+model Player {
+  id  Int @id @default(autoincrement())
+  name  String @unique
+  bestTime  Float
+}
+
+model Session {
+  id  String  @id
+  sid String  @unique
+  data  String 
+  expiresAt DateTime
+}

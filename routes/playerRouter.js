@@ -3,8 +3,10 @@ const playerRouter = express.Router();
 const playerController = require("../controllers/playerController");
 
 
-playerRouter.get("/start", playerController.gameStart);
-playerRouter.get("/end", playerController.gameEnd);
+playerRouter.post("/start", playerController.gameStart);
+playerRouter.post("/end",playerController.validatePlayer, playerController.gameEnd);
+
+playerRouter.get("/leaderboard", playerController.getPlayersForLeaderBoard)
 
 
 

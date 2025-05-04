@@ -26,8 +26,49 @@ async function getCharacterByName(name) {
     return character
 }
 
+
+async function createOrUpdatePlayer(username, time, bestTime) {
+    await prisma.player.upsert({
+        where: {
+            name: username
+        },
+        update: {
+            bestTime: time < parseFloat(bestTime) ? time : undefined
+        },
+        create: {
+            name: username,
+            bestTime: time
+        }
+    })
+}
+
+async function getPlayersForLeaderBoard() {
+    const players = await prisma.player.findMany({
+        orderBy: {
+            bestTime: "asc",
+        },
+        select: {
+            bestTime: true,
+            name: true
+        }
+    })
+    return players
+}
+
+async function getPlayerByName(username) {
+    const player = await prisma.player.findUnique({
+        where: {
+            name: username
+        }
+    })
+    return player
+}
+
 module.exports = {
     createCharacter,
     getCharacters,
-    getCharacterByName
+    getCharacterByName,
+    createOrUpdatePlayer,
+    getPlayersForLeaderBoard,
+    getPlayerByName
 }

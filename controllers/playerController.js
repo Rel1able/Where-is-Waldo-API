@@ -30,10 +30,6 @@ async function gameEnd(req, res) {
     const username = req.body.username;
     const time = parseFloat(req.body.time);
 
-    if (!req.session.bestTime) {
-        req.session.bestTime = "999999";
-    }
-
     req.session.username = username;
     if (time < parseFloat(req.session.bestTime)) {
         req.session.bestTime = req.body.time;
@@ -51,6 +47,7 @@ async function getPlayersForLeaderBoard(req, res) {
     res.status(200).json({"players": players})
 }
  
+
 
 module.exports = {
     gameStart,

@@ -18,7 +18,9 @@ app.use(cors({
 app.use(
     expressSession({
         cookie: {
-            maxAge: 24 * 60 * 60 * 1000
+            maxAge: 24 * 60 * 60 * 1000,
+            secure: true,
+            sameSite: "none"
         },
         secret: process.env.SESSION_SECRET,
         resave: false,

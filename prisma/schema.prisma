@@ -10,7 +10,7 @@ datasource db {
 
 model Character {
   id          Int    @id @default(autoincrement())
-  name        String
+  name        String  
   found       Boolean @default(false)
   coordinates Json
 }
@@ -19,7 +19,7 @@ model GameSession{
   id Int  @id @default(autoincrement())
   startedAt DateTime  @default(now())
   endedAt DateTime?
-  username  String @default("anonymous")
+  username  String @default("anonymous") 
   duration Float @default(999999)
 }
 

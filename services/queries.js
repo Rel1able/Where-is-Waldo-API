@@ -27,50 +27,78 @@ async function getCharacterByName(name) {
 }
 
 
-async function createOrUpdatePlayer(username, time, bestTime) {
-    await prisma.player.upsert({
-        where: {
-            name: username
-        },
-        update: {
-            bestTime: time < parseFloat(bestTime) ? time : parseFloat(bestTime)
-        },
-        create: {
-            name: username,
-            bestTime: time
-        }
-    })
-}
-
 async function getPlayersForLeaderBoard() {
-    const players = await prisma.player.findMany({
+    const players = await prisma.gameSession.findMany({
         orderBy: {
             bestTime: "asc",
         },
         select: {
-            bestTime: true,
-            name: true
+            duration: true,
+            username: true
         }
     })
     return players
 }
 
 async function getPlayerByName(username) {
-    const player = await prisma.player.findUnique({
+    const player = await prisma.gameSession.findFirst({
         where: {
-            name: username
+            username: username
         }
     })
     return player
 }
 
+async function createGameSession() {
+    const session = await prisma.gameSession.create();
+    return session;
+}
 
+async function getSessionById(sessionId) {
+    await prisma.gameSession.findUnique({
+        where: {
+            id: sessionId
+        }
+    });
+}
+
+async function endGame(sessionId) {
+    const session = getSessionById(sessionId);
+    const endedAt = new Date();
+
+    const durationInSeconds = (endedAt - new Date(session.startedAt)) / 1000;
+
+    return await prisma.gameSession.update({
+        where: {
+            id: sessionId
+        },
+        data: {
+            endedAt: endedAt,
+            username: username,
+            duration: durationInSeconds
+        }
+    })
+}
+
+
+// async function updatePlayerName(sessionId, username) {
+//     return await prisma.gameSession.update({
+//         where: {
+//             id: sessionId,
+//         },
+//         data: {
+//             username: username
+//         }
+//     })
+// }
 
 module.exports = {
     createCharacter,
     getCharacters,
     getCharacterByName,
-    createOrUpdatePlayer,
     getPlayersForLeaderBoard,
-    getPlayerByName
+    getPlayerByName,
+    createGameSession,
+    endGame,
+    // updatePlayerName
 }

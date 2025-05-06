@@ -1,7 +1,4 @@
 require("dotenv").config()
-const expressSession = require("express-session");
-const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const { PrismaClient } = require("./generated/prisma");
 
 const express = require("express");
 const app = express();
@@ -11,28 +8,7 @@ const playerRouter = require("./routes/playerRouter");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}));
-app.use(
-    expressSession({
-        cookie: {
-            maxAge: 24 * 60 * 60 * 1000,
-        },
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        store: new PrismaSessionStore(
-            new PrismaClient(),
-            {
-                checkPeriod: 2 * 60 * 1000,
-                dbRecordIdIsSessionId: true, 
-                dbRecordIdFunction: undefined
-            }
-        )
-    })
-)
+app.use(cors());
 app.use(charactersRouter);
 app.use("/game",playerRouter);
 

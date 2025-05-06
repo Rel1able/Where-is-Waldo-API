@@ -15,15 +15,10 @@ model Character {
   coordinates Json
 }
 
-model Player {
-  id       Int    @id @default(autoincrement())
-  name     String @unique
-  bestTime Float
-}
-
-model Session {
-  id        String   @id
-  sid       String   @unique
-  data      String
-  expiresAt DateTime
+model GameSession {
+  id        Int       @id @default(autoincrement())
+  startedAt DateTime  @default(now())
+  endedAt   DateTime?
+  username  String    @default("anonymous")
+  duration  Float     @default(999999)
 }

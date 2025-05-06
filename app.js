@@ -18,11 +18,11 @@ app.use(cors({
 app.use(
     expressSession({
         cookie: {
-            maxAge: 7 * 24 * 60 * 60 * 1000
+            maxAge: 24 * 60 * 60 * 1000
         },
         secret: process.env.SESSION_SECRET,
         resave: false,
-        saveUninitialized: false,
+        saveUninitialized: true,
         store: new PrismaSessionStore(
             new PrismaClient(),
             {

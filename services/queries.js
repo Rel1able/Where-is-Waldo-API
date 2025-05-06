@@ -33,7 +33,7 @@ async function createOrUpdatePlayer(username, time, bestTime) {
             name: username
         },
         update: {
-            bestTime: time < parseFloat(bestTime) ? time : undefined
+            bestTime: time < parseFloat(bestTime) ? time : parseFloat(bestTime)
         },
         create: {
             name: username,
@@ -63,6 +63,8 @@ async function getPlayerByName(username) {
     })
     return player
 }
+
+
 
 module.exports = {
     createCharacter,

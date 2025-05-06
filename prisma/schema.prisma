@@ -22,8 +22,9 @@ model Player {
 }
 
 model Session {
-  id  String  @id
-  sid String  @unique
-  data  String 
-  expiresAt DateTime
+  id        String   @id
+  sid       String   @unique
+  data      String   
+  expiresAt   DateTime
+  
 }

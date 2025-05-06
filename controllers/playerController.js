@@ -18,27 +18,27 @@ async function gameStart(req, res) {
     if (!req.session.bestTime) {
         req.session.bestTime = "999999";
     }
-    res.status(200).json({msg: "Game started"})
+    res.status(200).json({msg: "Game started", session: req.session})
 }
 
 async function gameEnd(req, res) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-       return res.status(400).json({errors: errors.array()})
-    }
-
-    const username = req.body.username;
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //    return res.status(400).json({errors: errors.array()})
+    // }
+    if (!req.session.username && req.body.username !== "anonymous") {
+        req.session.username = req.body.username
+    } 
+    const username = req.body.username
     const time = parseFloat(req.body.time);
 
-    req.session.username = username;
     if (time < parseFloat(req.session.bestTime)) {
         req.session.bestTime = req.body.time;
     }
     await db.createOrUpdatePlayer(username, time, req.session.bestTime)
-
     res.status(200).json({
         msg: "Score saved",
-        bestTime: req.session.bestTime
+        bestTime: req.body.time
     })
 }
 

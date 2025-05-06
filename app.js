@@ -19,12 +19,10 @@ app.use(
     expressSession({
         cookie: {
             maxAge: 24 * 60 * 60 * 1000,
-            secure: true,
-            sameSite: "none"
         },
         secret: process.env.SESSION_SECRET,
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         store: new PrismaSessionStore(
             new PrismaClient(),
             {

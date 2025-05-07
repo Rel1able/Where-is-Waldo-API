@@ -6,12 +6,6 @@ const validatePlayer = [
     body("username")
         .trim()
         .isLength({min: 3}).withMessage("Username must be at least 3 characters long")
-        .custom((async (username) => {
-            const user = await db.getPlayerByName(username);
-            if (user) {
-                throw new Error("Username is already taken");
-            }
-        }))
 ]
 
 async function gameStart(req, res) {

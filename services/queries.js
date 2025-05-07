@@ -29,8 +29,13 @@ async function getCharacterByName(name) {
 
 async function getPlayersForLeaderBoard() {
     const players = await prisma.gameSession.findMany({
+        where: {
+            endedAt: {
+                not: null
+            }
+        }, 
         orderBy: {
-            bestTime: "asc",
+            duration: "asc"
         },
         select: {
             duration: true,

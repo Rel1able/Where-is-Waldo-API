@@ -29,11 +29,6 @@ async function getCharacterByName(name) {
 
 async function getPlayersForLeaderBoard() {
     const players = await prisma.gameSession.findMany({
-        where: {
-            endedAt: {
-                not: null
-            }
-        }, 
         orderBy: {
             duration: "asc"
         },
@@ -48,7 +43,8 @@ async function getPlayersForLeaderBoard() {
 async function getPlayerByName(username) {
     const player = await prisma.gameSession.findFirst({
         where: {
-            username: username
+            username: username,
+            endedAt: null
         }
     })
     return player
@@ -87,17 +83,6 @@ async function endGame(sessionId, username) {
 }
 
 
-// async function updatePlayerName(sessionId, username) {
-//     return await prisma.gameSession.update({
-//         where: {
-//             id: sessionId,
-//         },
-//         data: {
-//             username: username
-//         }
-//     })
-// }
-
 module.exports = {
     createCharacter,
     getCharacters,
@@ -105,6 +90,5 @@ module.exports = {
     getPlayersForLeaderBoard,
     getPlayerByName,
     createGameSession,
-    endGame,
-    // updatePlayerName
+    endGame
 }

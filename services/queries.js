@@ -55,15 +55,16 @@ async function createGameSession() {
 }
 
 async function getSessionById(sessionId) {
-    await prisma.gameSession.findUnique({
+    const session = await prisma.gameSession.findUnique({
         where: {
             id: sessionId
         }
     });
+    return session
 }
 
-async function endGame(sessionId) {
-    const session = getSessionById(sessionId);
+async function endGame(sessionId, username) {
+    const session = await getSessionById(sessionId);
     const endedAt = new Date();
 
     const durationInSeconds = (endedAt - new Date(session.startedAt)) / 1000;

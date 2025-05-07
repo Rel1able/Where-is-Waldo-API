@@ -5,6 +5,7 @@ const playerController = require("../controllers/playerController");
 
 playerRouter.post("/start", playerController.gameStart);
 playerRouter.post("/end",playerController.validatePlayer, playerController.gameEnd);
+playerRouter.post("/saveTime", playerController.savePlayerTime);
 
 playerRouter.get("/leaderboard", playerController.getPlayersForLeaderBoard)
 

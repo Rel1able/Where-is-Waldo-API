@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 const validatePlayer = [
     body("username")
         .trim()
-        .isLength({min: 3}).withMessage("Username mist be at least 3 characters long")
+        .isLength({min: 3}).withMessage("Username must be at least 3 characters long")
         .custom((async (username) => {
             const user = await db.getPlayerByName(username);
             if (user) {
@@ -39,10 +39,17 @@ async function getPlayersForLeaderBoard(req, res) {
 }
  
 
+async function savePlayerTime(req, res) {
+    const { sessionId } = req.body;
+    await db.saveTime(sessionId)
+    res.json({msg: "Time was saved"})
+}
+
 
 module.exports = {
     gameStart,
     gameEnd,
     getPlayersForLeaderBoard,
+    savePlayerTime,
     validatePlayer
 }

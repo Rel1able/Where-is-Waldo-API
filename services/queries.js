@@ -65,6 +65,18 @@ async function getSessionById(sessionId) {
 }
 
 async function endGame(sessionId, username) {
+    return await prisma.gameSession.update({
+        where: {
+            id: sessionId
+        },
+        data: {
+            username: username
+
+        }
+    })
+}
+
+async function saveTime(sessionId) {
     const session = await getSessionById(sessionId);
     const endedAt = new Date();
 
@@ -76,7 +88,6 @@ async function endGame(sessionId, username) {
         },
         data: {
             endedAt: endedAt,
-            username: username,
             duration: durationInSeconds
         }
     })
@@ -90,5 +101,6 @@ module.exports = {
     getPlayersForLeaderBoard,
     getPlayerByName,
     createGameSession,
-    endGame
+    endGame,
+    saveTime
 }

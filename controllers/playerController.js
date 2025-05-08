@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 const validatePlayer = [
     body("username")
         .trim()
-        .isLength({min: 3}).withMessage("Username must be at least 3 characters long")
+        .isLength({min: 3, max: 10}).withMessage("Username must be between 3 and 10 characters long")
 ]
 
 async function gameStart(req, res) {
